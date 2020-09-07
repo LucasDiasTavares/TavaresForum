@@ -1,10 +1,16 @@
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from users.api.serializers import UserDisplaySerializers
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
+from questions.api.serializers import QuestionSerializers
+from questions.models import Question
+from questions.api.permissions import IsAuthorOrReadyOnly
 
 
-class CurrentUserAPIView(APIView):
+class QuestionViewSet(viewsets.ModelViewSet):
+    queryset = Question.objects.all()
+    lookup_field = "slug"
+    serializer_class = QuestionSerializers
+    permission_classes = [IsAuthenticated, IsAuthorOrReadyOnly]
 
-    def get(self, request):
-        serializer = UserDisplaySerializers(request.user)
-        return Response(serializer.data)
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+

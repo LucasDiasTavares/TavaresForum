@@ -1,8 +1,10 @@
-from django.urls import path
-from users.api.views import CurrentUserAPIView
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from questions.api import views
 
+router = DefaultRouter()
+router.register(r"questions", views.QuestionViewSet)
 
 urlpatterns = [
-    path('user/', CurrentUserAPIView.as_view(), name="current-user")
-
+    path("", include(router.urls))
 ]
