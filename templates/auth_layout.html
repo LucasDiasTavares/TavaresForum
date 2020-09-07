@@ -8,6 +8,7 @@
         <title>TavaresForum</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <style>
+
         .login-form-container {
             width: 300px;
             margin: auto;
@@ -16,12 +17,24 @@
             width: 400px;
             margin: auto;
         }
+
+        .auth-box{
+            border: 3px solid lightgrey;
+            border-radius: 10px;
+            padding-top: 1.5rem;
+            margin: auto;
+            width: 600px;
+        }
+
     </style>
 </head>
 <body>
-    <div class="auth-box text-center">
+
+    <div class="mt-3">
+        <div class="auth-box text-center">
         {% block content %}
         {% endblock %}
+        </div>
     </div>
 
 </body>

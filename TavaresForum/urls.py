@@ -19,7 +19,7 @@ urlpatterns = [
     path('api/', include("questions.api.urls")),
 
     path('api/rest-auth/', include("rest_auth.urls")),
-    path('api/rest-auth/registration', include("rest_auth.registration.urls")),
+    path('api/rest-auth/registration/', include("rest_auth.registration.urls")),
 
     re_path(r"^.*$", IndexTemplateView.as_view(), name="entry-point")
 

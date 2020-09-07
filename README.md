@@ -9,3 +9,9 @@
 
 ### Questions app
 - The slug from Question model is create automatically from a custom signal (add_slug_to_question)
+
+### Login & Register
+* You can use this 2 endpoints to help to test if don't wanna to test with the front web app.
+  * http://127.0.0.1:8000/accounts/register/
+  * http://127.0.0.1:8000/accounts/login/
+  * Or via shell: python3 manage.py createsuperuser
