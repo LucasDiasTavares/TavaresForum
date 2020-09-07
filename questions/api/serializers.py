@@ -1,0 +1,47 @@
+from rest_framework import serializers
+from questions.models import Question, Answer
+
+
+class QuestionSerializers(serializers.ModelSerializer):
+    author = serializers.StringRelatedField(read_only=True)
+    created_at = serializers.SerializerMethodField()
+    slug = serializers.SlugField(read_only=True)
+    answer_count = serializers.SerializerMethodField()
+    user_has_aswered = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Question
+        fields = ["updated_at"]
+
+    def get_created_at(self, instance):
+        # %B  == Month, %d == Day, %Y == Year
+        return instance.created_at.strftime("%B %d %Y")
+
+    def get_answers_count(self, instance):
+        return instance.answers.count()
+
+    def get_user_has_answered(self, instance):
+        request = self.context.get("request")
+        return instance.answers.filter(author=request.user).exists()
+
+
+class AnswerSerializers(serializers.ModelSerializer):
+    author = serializers.StringRelatedField(read_only=True)
+    created_at = serializers.SerializerMethodField()
+    likes_count_field = serializers.SerializerMethodField()
+    user_has_voted = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Answer
+        exclude = ["question", "voters", "updated_at"]
+
+    def get_created_at(self, instance):
+        # %B  == Month, %d == Day, %Y == Year
+        return instance.created_at.strftime("%B %d %Y")
+
+    def get_likes_count(self, instance):
+        return instance.voters.count()
+
+    def get_user_has_voted(self, instance):
+        request = self.context.get("request")
+        return instance.voters.filter(pk=request.user.pk).exists()
