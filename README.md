@@ -1,3 +1,29 @@
+# Backend
+
+## Project setup
+
+### Create a new Virtual Environment
+```
+pyhton3 -m venv venv
+```
+
+### Activate your Virtual Environment
+```
+source venv/bin/activate
+```
+
+### Install dependencies
+```
+pip install -r requirements.txt
+```
+
+### Run server
+```
+python3 manage.py runserver
+```
+
+## Backend notes
+
 ### Login
 * Vefiry account email disabled.
   * If wanna enable email vefirycation you can find read this documentation: [django-registration](https://django-registration.readthedocs.io/en/3.1/activation-workflow.html)
@@ -14,4 +40,32 @@
 * You can use this 2 endpoints to help to test if don't wanna to test with the front web app.
   * http://127.0.0.1:8000/accounts/register/
   * http://127.0.0.1:8000/accounts/login/
-  * Or via shell: python3 manage.py createsuperuser
+  * Or via shell: `python3 manage.py createsuperuser`
+  
+  
+# Frontend
+
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+## Frontend notes
+
+### Webpack Stats
+The first time when you start the frontend, be sure that VUE.JS will create a file called 'webpack-stats.json'.

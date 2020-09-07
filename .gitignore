@@ -6,3 +6,5 @@
 media
 .env
 *.idea
+
+node_modules
