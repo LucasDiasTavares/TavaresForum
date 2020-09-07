@@ -15,7 +15,7 @@ class QuestionSerializers(serializers.ModelSerializer):
 
     def get_created_at(self, instance):
         # %B  == Month, %d == Day, %Y == Year
-        return instance.created_at.strftime("%B %d %Y")
+        return instance.created_at.strftime("%B %d, %Y")
 
     def get_answers_count(self, instance):
         return instance.answers.count()
@@ -28,7 +28,7 @@ class QuestionSerializers(serializers.ModelSerializer):
 class AnswerSerializers(serializers.ModelSerializer):
     author = serializers.StringRelatedField(read_only=True)
     created_at = serializers.SerializerMethodField()
-    likes_count_field = serializers.SerializerMethodField()
+    likes_count = serializers.SerializerMethodField()
     user_has_voted = serializers.SerializerMethodField()
 
     class Meta:
@@ -37,7 +37,7 @@ class AnswerSerializers(serializers.ModelSerializer):
 
     def get_created_at(self, instance):
         # %B  == Month, %d == Day, %Y == Year
-        return instance.created_at.strftime("%B %d %Y")
+        return instance.created_at.strftime("%B %d, %Y")
 
     def get_likes_count(self, instance):
         return instance.voters.count()
