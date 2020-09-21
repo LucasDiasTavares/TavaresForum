@@ -8,14 +8,14 @@ async function getJSON(response) {
 // If wanna use imgs in your project change application/json to allow images
 function apiService(endpoint, method, data) {
   const config = {
-    method: method || GET,
+    method: method || "GET",
     body: data !== undefined ? JSON.stringify(data) : null,
     headers: {
       "content-type": "application/json",
       "X-CSRFTOKEN": CSRF_TOKEN,
     },
   };
-  return fetch(endpoins, config)
+  return fetch(endpoint, config)
     .then(getJSON)
     .catch((error) => console.log(error));
 }
