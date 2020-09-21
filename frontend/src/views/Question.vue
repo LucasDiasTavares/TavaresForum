@@ -1,15 +1,46 @@
 <template>
-  <div class="single-question mt-2">
-    <div class="container">
+  <div class="single-question mt-2 container">
+    <div>
       <h1>{{ question.content }}</h1>
       <p class="mb-0">
         Posted by:
         <span class="text-danger font-weight-bold">{{ question.author }}</span>
       </p>
       <p>{{ question.created_at }}</p>
+      <hr />
     </div>
-    <hr />
-    <div class="container">
+    <div class="border-bottom mb-3" v-if="userHasAnswered">
+      <p class="font-weight-bold text-success">
+        You've already written an answer!
+      </p>
+    </div>
+    <div v-else-if="showForm">
+      <form class="card" @submit.prevent="onSubmit">
+        <div class="card-header px-3">
+          Answer the question
+        </div>
+        <div class="card-block">
+          <textarea
+            placeholder="Share your knowledge!"
+            class="form-control"
+            v-model="newAnswerBody"
+            rows="5"
+          ></textarea>
+        </div>
+        <div class="card-footer px-3">
+          <button class="btn btn-sm btn-success" type="submit">
+            Submit your answer
+          </button>
+        </div>
+      </form>
+      <p class="text-danger mt-2 font-weight-bold">{{ error }}</p>
+    </div>
+    <div v-else>
+      <button @click="showForm = true" class="btn btn-sm btn-success">
+        Answer the question
+      </button>
+    </div>
+    <div>
       <AnswerComponent
         v-for="(answer, index) in answers"
         :key="index"
@@ -38,6 +69,10 @@ export default {
     return {
       question: {},
       answers: [],
+      newAnswerBody: null,
+      error: null,
+      userHasAnswered: false,
+      showForm: false,
     };
   },
   methods: {
@@ -48,6 +83,7 @@ export default {
       let endpoint = `/api/questions/${this.slug}/`;
       apiService(endpoint).then((data) => {
         this.question = data;
+        this.userHasAnswered = data.user_has_answered;
         this.setPageTitle(data.content);
       });
     },
@@ -56,6 +92,24 @@ export default {
       apiService(endpoint).then((data) => {
         this.answers = data.results;
       });
+    },
+    onSubmit() {
+      if (this.newAnswerBody) {
+        let endpoint = `/api/questions/${this.slug}/answer/`;
+        apiService(endpoint, "POST", { body: this.newAnswerBody }).then(
+          (data) => {
+            this.answers.unshift(data);
+          }
+        );
+        this.newAnswerBody = null;
+        this.showForm = false;
+        this.userHasAnswered = true;
+        if (this.error) {
+          this.error = null;
+        }
+      } else {
+        this.error = "You can't send an empty answer!";
+      }
     },
   },
   created() {
