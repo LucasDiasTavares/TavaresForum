@@ -18,7 +18,7 @@
         <hr />
       </div>
       <div class="my-4">
-        <p v-show="loadingQuestions">...loading</p>
+        <p v-show="loadingQuestions">...loading...</p>
         <button
           class="btn btn-sm btn-outline-success"
           v-show="next"
