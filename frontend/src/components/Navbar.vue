@@ -22,8 +22,8 @@
             >
           </li>
           <li class="nav-item">
-            <router-link to="/" class="btn btn-sm btn-info mx-3"
-              >Add Question</router-link
+            <router-link to="/ask" class="btn btn-sm btn-info mx-3"
+              >Ask Question</router-link
             >
           </li>
           <li class="nav-item">
@@ -38,7 +38,7 @@
 </template>
 <script>
 export default {
-  name: "NavbarComponent"
+  name: "NavbarComponent",
 };
 </script>
 
