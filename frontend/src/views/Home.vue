@@ -8,7 +8,12 @@
             question.author
           }}</span>
         </p>
-        <h2>{{ question.content }}</h2>
+        <router-link
+          class="question-link text-dark"
+          :to="{ name: 'question', params: { slug: question.slug } }"
+        >
+          <h2>{{ question.content }}</h2>
+        </router-link>
         <p>Answers: {{ question.answers_count }}</p>
         <hr />
       </div>
@@ -36,6 +41,16 @@ export default {
   },
   created() {
     this.getQuestions();
+    document.title = "TavaresForum";
   },
 };
 </script>
+
+<style scoped>
+a h2 {
+  font-weight: bold !important;
+}
+a:hover {
+  text-decoration: none;
+}
+</style>
