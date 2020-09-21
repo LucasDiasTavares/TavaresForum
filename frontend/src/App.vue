@@ -6,12 +6,12 @@
 </template>
 
 <script>
-import NavbarComponent from "./components/Navbar";
+import NavbarComponent from "@/components/Navbar";
 export default {
   name: "App",
   components: {
-    NavbarComponent
-  }
+    NavbarComponent,
+  },
 };
 </script>
 
