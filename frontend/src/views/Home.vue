@@ -28,21 +28,21 @@ export default {
   name: "Home",
   data() {
     return {
-      questions: [],
+      questions: []
     };
   },
   methods: {
     getQuestions() {
       let endpoint = "api/questions/";
-      apiService(endpoint).then((data) => {
+      apiService(endpoint).then(data => {
         this.questions.push(...data.results);
       });
-    },
+    }
   },
   created() {
     this.getQuestions();
     document.title = "TavaresForum";
-  },
+  }
 };
 </script>
 

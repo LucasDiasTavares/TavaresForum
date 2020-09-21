@@ -12,12 +12,12 @@ function apiService(endpoint, method, data) {
     body: data !== undefined ? JSON.stringify(data) : null,
     headers: {
       "content-type": "application/json",
-      "X-CSRFTOKEN": CSRF_TOKEN,
-    },
+      "X-CSRFTOKEN": CSRF_TOKEN
+    }
   };
   return fetch(endpoint, config)
     .then(getJSON)
-    .catch((error) => console.log(error));
+    .catch(error => console.log(error));
 }
 
 export { apiService };

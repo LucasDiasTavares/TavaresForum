@@ -19,12 +19,12 @@ export default {
   props: {
     slug: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
   data() {
     return {
-      question: {},
+      question: {}
     };
   },
   methods: {
@@ -33,15 +33,15 @@ export default {
     },
     getQuestionData() {
       let endpoint = `/api/questions/${this.slug}/`;
-      apiService(endpoint).then((data) => {
+      apiService(endpoint).then(data => {
         this.question = data;
         this.setPageTitle(data.content);
       });
-    },
+    }
   },
   created() {
     this.getQuestionData();
-  },
+  }
 };
 </script>
 
