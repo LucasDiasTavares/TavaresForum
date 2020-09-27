@@ -1,11 +1,13 @@
+import django_heroku
 import os
 from pathlib import Path
+from decouple import config
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
-SECRET_KEY = '72if7zv%rjz4_8+aex+b9g^tr)(2qd=0pj3b@k%8#!g*#a299m'
+SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = []
 
@@ -100,11 +102,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "assets"),
+    os.path.join(BASE_DIR, 'static'),
     os.path.join(BASE_DIR, "front-end/dist")
 ]
 
-# STATIC_ROOT = ""
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
 AUTH_USER_MODEL = "users.CustomUser"
 
@@ -138,3 +140,5 @@ WEBPACK_LOADER = {
         'STATS_FILE': os.path.join(BASE_DIR, 'frontend', 'webpack-stats.json'),
     }
 }
+
+django_heroku.settings(locals())

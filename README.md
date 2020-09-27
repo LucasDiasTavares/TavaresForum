@@ -24,6 +24,13 @@ python3 manage.py runserver
 
 ## Backend notes
 
+### .env
+* Create a file .env to set debug and secret-key
+```
+DEBUG=True
+SECRET_KEY=SomeRandomCaracteresWithout''
+```
+
 ### Login
 * Vefiry account email disabled.
   * If wanna enable email vefirycation you can find read this documentation: [django-registration](https://django-registration.readthedocs.io/en/3.1/activation-workflow.html)
