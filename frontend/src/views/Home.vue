@@ -40,7 +40,7 @@ export default {
     return {
       questions: [],
       next: null,
-      loadingQuestions: false,
+      loadingQuestions: false
     };
   },
   methods: {
@@ -50,7 +50,7 @@ export default {
         endpoint = this.next;
       }
       this.loadingQuestions = true;
-      apiService(endpoint).then((data) => {
+      apiService(endpoint).then(data => {
         this.questions.push(...data.results);
         this.loadingQuestions = false;
         if (data.next) {
@@ -59,12 +59,12 @@ export default {
           this.next = null;
         }
       });
-    },
+    }
   },
   created() {
     this.getQuestions();
     document.title = "TavaresForum";
-  },
+  }
 };
 </script>
 

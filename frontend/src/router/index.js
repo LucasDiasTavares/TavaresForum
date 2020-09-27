@@ -12,37 +12,37 @@ const routes = [
   {
     path: "/",
     name: "home",
-    component: Home,
+    component: Home
   },
   {
     path: "/question/:slug",
     name: "question",
     component: Question,
-    props: true,
+    props: true
   },
   {
     path: "/ask/:slug?",
     name: "question-editor",
     component: QuestionEditor,
-    props: true,
+    props: true
   },
   {
     path: "/answer/:id",
     name: "answer-editor",
     component: AnswerEditor,
-    props: true,
+    props: true
   },
   {
     path: "*",
     name: "page-not-found",
-    component: NotFound,
-  },
+    component: NotFound
+  }
 ];
 
 const router = new VueRouter({
   mode: "history",
   // base: process.env.BASE_URL,
-  routes,
+  routes
 });
 
 export default router;

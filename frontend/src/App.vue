@@ -12,18 +12,18 @@ import { apiService } from "@/common/api.service";
 export default {
   name: "App",
   components: {
-    NavbarComponent,
+    NavbarComponent
   },
   methods: {
     async setUserInfo() {
       const data = await apiService("/api/user/");
       const requestUser = data["username"];
       window.localStorage.setItem("username", requestUser);
-    },
+    }
   },
   created() {
     this.setUserInfo();
-  },
+  }
 };
 </script>
 

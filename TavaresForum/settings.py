@@ -99,6 +99,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "assets"),
+    os.path.join(BASE_DIR, "front-end/dist")
+]
+
+# STATIC_ROOT = ""
+
 AUTH_USER_MODEL = "users.CustomUser"
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
