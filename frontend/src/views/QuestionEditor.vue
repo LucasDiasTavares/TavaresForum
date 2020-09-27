@@ -1,14 +1,13 @@
 <template>
   <div class="container mt-2">
-    <h1 class="mb-3">Ask a Question</h1>
+    <h1 class="mb-3">Ask a question</h1>
     <form @submit.prevent="onSubmit">
       <textarea
         v-model="question_body"
         class="form-control"
         placeholder="What do you want to ask?"
         rows="3"
-      >
-      </textarea>
+      ></textarea>
       <br />
       <button type="submit" class="btn btn-success">Publish</button>
     </form>
@@ -24,7 +23,7 @@ export default {
   data() {
     return {
       question_body: null,
-      error: null,
+      error: null
     };
   },
   methods: {
@@ -37,18 +36,18 @@ export default {
         let endpoint = "/api/questions/";
         let method = "POST";
         apiService(endpoint, method, {
-          content: this.question_body,
-        }).then((data) => {
+          content: this.question_body
+        }).then(data => {
           this.$router.push({
             name: "question",
-            params: { slug: data.slug },
+            params: { slug: data.slug }
           });
         });
       }
-    },
+    }
   },
   created() {
     document.title = "Editor - TavaresForum";
-  },
+  }
 };
 </script>

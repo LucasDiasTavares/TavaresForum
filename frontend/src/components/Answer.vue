@@ -1,17 +1,16 @@
 <template>
   <div class="border-bottom">
     <p class="text-muted">
-      <strong>{{ answer.author }}</strong> &#8901; {{ answer.created_at }}
+      <strong>{{ answer.author }}</strong>
+      &#8901; {{ answer.created_at }}
     </p>
     <p>{{ answer.body }}</p>
     <div class="mt-2 mb-4" v-if="isAnswerAuthor">
-      <button class="btn btn-sm btn-outline-warning mr-2">Edit</button>
-      <button
-        @click="triggerDeleteAnswer"
-        class="btn btn-sm btn-outline-danger"
-      >
-        Delete
-      </button>
+      <router-link
+        :to="{name: 'answer-editor', params: {id: answer.id}}"
+        class="btn btn-sm btn-outline-warning mr-3"
+      >Edit</router-link>
+      <button @click="triggerDeleteAnswer" class="btn btn-sm btn-outline-danger">Delete</button>
     </div>
   </div>
 </template>
@@ -22,22 +21,22 @@ export default {
   props: {
     answer: {
       type: Object,
-      required: true,
+      required: true
     },
     requestUser: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
   computed: {
     isAnswerAuthor() {
       return this.answer.author === this.requestUser;
-    },
+    }
   },
   methods: {
     triggerDeleteAnswer() {
       this.$emit("delete-answer", this.answer);
-    },
-  },
+    }
+  }
 };
 </script>
