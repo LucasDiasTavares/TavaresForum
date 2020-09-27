@@ -1,3 +1,40 @@
+# TavaresForum
+TavaresForum is a MVP (minimum value product), of a question. Exploring the basics of Django, Django Rest and Vuejs CLI.
+- [Click here](https://tavares-forum.herokuapp.com/) and see the online preview or see some pictures that explain the online preview.
+* Features:
+  * Login
+  * Signup
+  * Ask question
+  * Edit your question
+  * Delete your question
+  * Send only 1 answer per question
+  * Edit your answer
+  * Delete your answer
+  * Like others answers
+  * Can't like your answer
+<br>
+<br>
+<img src="imgReadme/Login.png" /> 
+<br>
+<img src="imgReadme/Signup.png" /> 
+<br>
+<img src="imgReadme/Home.png" /> 
+<br>
+<img src="imgReadme/AskAQuestion.png" /> 
+<br>
+<img src="imgReadme/YourQuestion.png" /> 
+<br>
+<img src="imgReadme/EditYourQuestion.png" /> 
+<br>
+<img src="imgReadme/SendOnly1Answer.png" /> 
+<br>
+<img src="imgReadme/EditAnswer.png" /> 
+<br>
+<img src="imgReadme/LikeOthesAnswers.png" /> 
+<br>
+<img src="imgReadme/LikeJust1TimePerAnswer.png" /> 
+<br>
+
 # Backend
 
 ## Project setup
