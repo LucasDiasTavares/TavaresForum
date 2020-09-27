@@ -2,6 +2,7 @@
   <div class="single-question mt-2 container">
     <div>
       <h1>{{ question.content }}</h1>
+      <QuestionActions v-if="isQuestionAuthor" :slug="question.slug" />
       <p class="mb-0">
         Posted by:
         <span class="text-danger font-weight-bold">{{ question.author }}</span>
@@ -16,9 +17,7 @@
     </div>
     <div v-else-if="showForm">
       <form class="card" @submit.prevent="onSubmit">
-        <div class="card-header px-3">
-          Answer the question
-        </div>
+        <div class="card-header px-3">Answer the question</div>
         <div class="card-block">
           <textarea
             placeholder="Share your knowledge!"
@@ -65,17 +64,19 @@
 <script>
 import { apiService } from "@/common/api.service";
 import AnswerComponent from "@/components/Answer";
+import QuestionActions from "@/components/QuestionActions";
 
 export default {
   name: "Question",
   props: {
     slug: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
   components: {
     AnswerComponent,
+    QuestionActions
   },
   data() {
     return {
@@ -87,8 +88,13 @@ export default {
       showForm: false,
       next: null,
       loadingAnswers: false,
-      requestUser: null,
+      requestUser: null
     };
+  },
+  computed: {
+    isQuestionAuthor() {
+      return this.question.author === this.requestUser;
+    }
   },
   methods: {
     setPageTitle(title) {
@@ -99,7 +105,7 @@ export default {
     },
     getQuestionData() {
       let endpoint = `/api/questions/${this.slug}/`;
-      apiService(endpoint).then((data) => {
+      apiService(endpoint).then(data => {
         this.question = data;
         this.userHasAnswered = data.user_has_answered;
         this.setPageTitle(data.content);
@@ -111,7 +117,7 @@ export default {
         endpoint = this.next;
       }
       this.loadingAnswers = true;
-      apiService(endpoint).then((data) => {
+      apiService(endpoint).then(data => {
         this.answers.push(...data.results);
         this.loadingAnswers = false;
         if (data.next) {
@@ -125,7 +131,7 @@ export default {
       if (this.newAnswerBody) {
         let endpoint = `/api/questions/${this.slug}/answer/`;
         apiService(endpoint, "POST", { body: this.newAnswerBody }).then(
-          (data) => {
+          data => {
             this.answers.unshift(data);
           }
         );
@@ -148,13 +154,13 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    },
+    }
   },
   created() {
     this.getQuestionData();
     this.getQuestionAnswers();
     this.setRequestUser();
-  },
+  }
 };
 </script>
 

@@ -1,6 +1,7 @@
 <template>
   <div class="container mt-2">
-    <h1 class="mb-3">Ask a question</h1>
+    <h1 v-if="this.slug !== undefined" class="mb-3">Edit your question</h1>
+    <h1 v-else>Ask a question</h1>
     <form @submit.prevent="onSubmit">
       <textarea
         v-model="question_body"
@@ -20,6 +21,12 @@ import { apiService } from "@/common/api.service";
 
 export default {
   name: "QuestionEditor",
+  props: {
+    slug: {
+      type: String,
+      required: false
+    }
+  },
   data() {
     return {
       question_body: null,
@@ -35,6 +42,12 @@ export default {
       } else {
         let endpoint = "/api/questions/";
         let method = "POST";
+
+        if (this.slug !== undefined) {
+          endpoint += `${this.slug}/`;
+          method = "PUT";
+        }
+
         apiService(endpoint, method, {
           content: this.question_body
         }).then(data => {
@@ -44,6 +57,15 @@ export default {
           });
         });
       }
+    }
+  },
+  async beforeRouteEnter(to, from, next) {
+    if (to.params.slug !== undefined) {
+      let endpoint = `/api/questions/${to.params.slug}/`;
+      let data = await apiService(endpoint);
+      return next(vm => (vm.question_body = data.content));
+    } else {
+      return next();
     }
   },
   created() {
