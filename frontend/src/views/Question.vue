@@ -1,5 +1,5 @@
 <template>
-  <div class="single-question mt-2 container">
+  <div v-if="question" class="single-question mt-2 container">
     <div>
       <h1>{{ question.content }}</h1>
       <QuestionActions v-if="isQuestionAuthor" :slug="question.slug" />
@@ -59,6 +59,9 @@
       </button>
     </div>
   </div>
+  <div v-else>
+    <h1 class="text-danger text-center font-weight-bold">Question not found</h1>
+  </div>
 </template>
 
 <script>
@@ -106,9 +109,14 @@ export default {
     getQuestionData() {
       let endpoint = `/api/questions/${this.slug}/`;
       apiService(endpoint).then(data => {
-        this.question = data;
-        this.userHasAnswered = data.user_has_answered;
-        this.setPageTitle(data.content);
+        if (data) {
+          this.question = data;
+          this.userHasAnswered = data.user_has_answered;
+          this.setPageTitle(data.content);
+        } else {
+          this.question = null;
+          this.setPageTitle("404 - Page not found");
+        }
       });
     },
     getQuestionAnswers() {
