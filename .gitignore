@@ -7,4 +7,5 @@ media
 .env
 *.idea
 .env
+staticfiles
 node_modules
